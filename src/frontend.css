@@ -1,62 +1,32 @@
 /**
  * Glassmorphism Background Styles
  * Frontend and Editor shared styles
+ * 
+ * NOTE: backdrop-filter is applied via scoped <style> blocks in PHP,
+ * NOT here, to ensure proper blur with opacity
  */
 
 .has-glassmorphism {
     position: relative;
     overflow: hidden;
-}
-
-.has-glassmorphism::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    
-    /* Glassmorphism effect */
-    background: var(--glass-tint, rgba(255, 255, 255, 0.1));
-    opacity: var(--glass-opacity, 0.5);
-    backdrop-filter: blur(var(--glass-blur, 10px)) saturate(var(--glass-saturation, 1));
-    -webkit-backdrop-filter: blur(var(--glass-blur, 10px)) saturate(var(--glass-saturation, 1));
-    
-    /* Glass border */
-    border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity, 0.3));
-    border-radius: inherit;
+    isolation: isolate;
 }
 
 /* Ensure content is above the glass layer */
-.has-glassmorphism > * {
+.has-glassmorphism>* {
     position: relative;
     z-index: 1;
 }
 
-/* Fix for blocks that use flexbox */
-.has-glassmorphism.wp-block-group,
-.has-glassmorphism.wp-block-columns,
-.has-glassmorphism.wp-block-buttons {
-    isolation: isolate;
-}
-
-/* Cover block specific fix */
-.has-glassmorphism.wp-block-cover::before {
-    border-radius: 0;
-}
-
-/* Button specific styles */
-.has-glassmorphism.wp-block-button__link {
-    overflow: visible;
-}
-
-.has-glassmorphism.wp-block-button__link::before {
-    border-radius: inherit;
-}
-
-/* Kadence blocks specific fixes */
-.has-glassmorphism.kt-row-layout-inner,
-.has-glassmorphism.kadence-column,
-.has-glassmorphism.kt-accordion-wrap,
-.has-glassmorphism.kt-tabs-wrap {
-    isolation: isolate;
+/* Paragraph and Heading - need block display for pseudo-element */
+.has-glassmorphism.wp-block-paragraph,
+.has-glassmorphism.wp-block-heading,
+h1.has-glassmorphism,
+h2.has-glassmorphism,
+h3.has-glassmorphism,
+h4.has-glassmorphism,
+h5.has-glassmorphism,
+h6.has-glassmorphism,
+p.has-glassmorphism {
+    display: block;
 }

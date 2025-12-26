@@ -19,6 +19,8 @@ import { __ } from '@wordpress/i18n';
 // Blocks that support glassmorphism
 const SUPPORTED_BLOCKS = [
     // Core blocks
+    'core/paragraph',
+    'core/heading',
     'core/group',
     'core/columns',
     'core/column',
@@ -43,8 +45,8 @@ const SUPPORTED_BLOCKS = [
 /**
  * Add glassmorphism attributes to supported blocks
  */
-function addGlassmorphismAttributes( settings, name ) {
-    if ( ! SUPPORTED_BLOCKS.includes( name ) ) {
+function addGlassmorphismAttributes(settings, name) {
+    if (!SUPPORTED_BLOCKS.includes(name)) {
         return settings;
     }
 
@@ -89,12 +91,12 @@ addFilter(
 /**
  * Add glassmorphism controls to the block inspector
  */
-const withGlassmorphismControls = createHigherOrderComponent( ( BlockEdit ) => {
-    return ( props ) => {
+const withGlassmorphismControls = createHigherOrderComponent((BlockEdit) => {
+    return (props) => {
         const { name, attributes, setAttributes } = props;
 
-        if ( ! SUPPORTED_BLOCKS.includes( name ) ) {
-            return <BlockEdit { ...props } />;
+        if (!SUPPORTED_BLOCKS.includes(name)) {
+            return <BlockEdit {...props} />;
         }
 
         const {
@@ -108,96 +110,96 @@ const withGlassmorphismControls = createHigherOrderComponent( ( BlockEdit ) => {
 
         return (
             <Fragment>
-                <BlockEdit { ...props } />
+                <BlockEdit {...props} />
                 <InspectorControls>
                     <PanelBody
-                        title={ __( 'Glassmorphism', 'glassmorph-block' ) }
-                        initialOpen={ false }
+                        title={__('Glassmorphism', 'glassmorph-block')}
+                        initialOpen={false}
                         className="glassmorph-panel"
                     >
                         <ToggleControl
-                            label={ __( 'Enable Glassmorphism', 'glassmorph-block' ) }
-                            checked={ glassmorphismEnabled }
-                            onChange={ ( value ) =>
-                                setAttributes( { glassmorphismEnabled: value } )
+                            label={__('Enable Glassmorphism', 'glassmorph-block')}
+                            checked={glassmorphismEnabled}
+                            onChange={(value) =>
+                                setAttributes({ glassmorphismEnabled: value })
                             }
                         />
 
-                        { glassmorphismEnabled && (
+                        {glassmorphismEnabled && (
                             <Fragment>
                                 <RangeControl
-                                    label={ __( 'Blur Amount', 'glassmorph-block' ) }
-                                    value={ glassmorphismBlur }
-                                    onChange={ ( value ) =>
-                                        setAttributes( { glassmorphismBlur: value } )
+                                    label={__('Blur Amount', 'glassmorph-block')}
+                                    value={glassmorphismBlur}
+                                    onChange={(value) =>
+                                        setAttributes({ glassmorphismBlur: value })
                                     }
-                                    min={ 0 }
-                                    max={ 50 }
-                                    step={ 1 }
-                                    help={ __( 'Controls the blur intensity (px)', 'glassmorph-block' ) }
+                                    min={0}
+                                    max={50}
+                                    step={1}
+                                    help={__('Controls the blur intensity (px)', 'glassmorph-block')}
                                 />
 
                                 <RangeControl
-                                    label={ __( 'Background Opacity', 'glassmorph-block' ) }
-                                    value={ glassmorphismOpacity }
-                                    onChange={ ( value ) =>
-                                        setAttributes( { glassmorphismOpacity: value } )
+                                    label={__('Background Opacity', 'glassmorph-block')}
+                                    value={glassmorphismOpacity}
+                                    onChange={(value) =>
+                                        setAttributes({ glassmorphismOpacity: value })
                                     }
-                                    min={ 0 }
-                                    max={ 100 }
-                                    step={ 1 }
-                                    help={ __( 'Transparency of the glass layer (%)', 'glassmorph-block' ) }
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                    help={__('Transparency of the glass layer (%)', 'glassmorph-block')}
                                 />
 
                                 <RangeControl
-                                    label={ __( 'Saturation', 'glassmorph-block' ) }
-                                    value={ glassmorphismSaturation }
-                                    onChange={ ( value ) =>
-                                        setAttributes( { glassmorphismSaturation: value } )
+                                    label={__('Saturation', 'glassmorph-block')}
+                                    value={glassmorphismSaturation}
+                                    onChange={(value) =>
+                                        setAttributes({ glassmorphismSaturation: value })
                                     }
-                                    min={ 0 }
-                                    max={ 200 }
-                                    step={ 1 }
-                                    help={ __( 'Color saturation of backdrop (%)', 'glassmorph-block' ) }
+                                    min={0}
+                                    max={200}
+                                    step={1}
+                                    help={__('Color saturation of backdrop (%)', 'glassmorph-block')}
                                 />
 
                                 <RangeControl
-                                    label={ __( 'Border Opacity', 'glassmorph-block' ) }
-                                    value={ glassmorphismBorderOpacity }
-                                    onChange={ ( value ) =>
-                                        setAttributes( { glassmorphismBorderOpacity: value } )
+                                    label={__('Border Opacity', 'glassmorph-block')}
+                                    value={glassmorphismBorderOpacity}
+                                    onChange={(value) =>
+                                        setAttributes({ glassmorphismBorderOpacity: value })
                                     }
-                                    min={ 0 }
-                                    max={ 100 }
-                                    step={ 1 }
-                                    help={ __( 'Opacity of the glass border (%)', 'glassmorph-block' ) }
+                                    min={0}
+                                    max={100}
+                                    step={1}
+                                    help={__('Opacity of the glass border (%)', 'glassmorph-block')}
                                 />
 
                                 <Text
                                     as="label"
-                                    style={ {
+                                    style={{
                                         display: 'block',
                                         marginBottom: '8px',
                                         marginTop: '16px',
-                                    } }
+                                    }}
                                 >
-                                    { __( 'Tint Color', 'glassmorph-block' ) }
+                                    {__('Tint Color', 'glassmorph-block')}
                                 </Text>
                                 <ColorPicker
-                                    color={ glassmorphismTint }
-                                    onChange={ ( value ) =>
-                                        setAttributes( { glassmorphismTint: value } )
+                                    color={glassmorphismTint}
+                                    onChange={(value) =>
+                                        setAttributes({ glassmorphismTint: value })
                                     }
-                                    enableAlpha={ true }
+                                    enableAlpha={true}
                                 />
                             </Fragment>
-                        ) }
+                        )}
                     </PanelBody>
                 </InspectorControls>
             </Fragment>
         );
     };
-}, 'withGlassmorphismControls' );
+}, 'withGlassmorphismControls');
 
 addFilter(
     'editor.BlockEdit',
@@ -208,12 +210,12 @@ addFilter(
 /**
  * Add glassmorphism styles to the block wrapper in editor
  */
-const withGlassmorphismStyles = createHigherOrderComponent( ( BlockListBlock ) => {
-    return ( props ) => {
+const withGlassmorphismStyles = createHigherOrderComponent((BlockListBlock) => {
+    return (props) => {
         const { name, attributes } = props;
 
-        if ( ! SUPPORTED_BLOCKS.includes( name ) ) {
-            return <BlockListBlock { ...props } />;
+        if (!SUPPORTED_BLOCKS.includes(name)) {
+            return <BlockListBlock {...props} />;
         }
 
         const {
@@ -225,12 +227,12 @@ const withGlassmorphismStyles = createHigherOrderComponent( ( BlockListBlock ) =
             glassmorphismBorderOpacity,
         } = attributes;
 
-        if ( ! glassmorphismEnabled ) {
-            return <BlockListBlock { ...props } />;
+        if (!glassmorphismEnabled) {
+            return <BlockListBlock {...props} />;
         }
 
         const glassStyles = {
-            '--glass-blur': `${ glassmorphismBlur }px`,
+            '--glass-blur': `${glassmorphismBlur}px`,
             '--glass-opacity': glassmorphismOpacity / 100,
             '--glass-tint': glassmorphismTint,
             '--glass-saturation': glassmorphismSaturation / 100,
@@ -239,19 +241,19 @@ const withGlassmorphismStyles = createHigherOrderComponent( ( BlockListBlock ) =
 
         return (
             <BlockListBlock
-                { ...props }
-                wrapperProps={ {
+                {...props}
+                wrapperProps={{
                     ...props.wrapperProps,
                     style: {
-                        ...( props.wrapperProps?.style || {} ),
+                        ...(props.wrapperProps?.style || {}),
                         ...glassStyles,
                     },
-                    className: `${ props.wrapperProps?.className || '' } has-glassmorphism`.trim(),
-                } }
+                    className: `${props.wrapperProps?.className || ''} has-glassmorphism`.trim(),
+                }}
             />
         );
     };
-}, 'withGlassmorphismStyles' );
+}, 'withGlassmorphismStyles');
 
 addFilter(
     'editor.BlockListBlock',
