@@ -1,0 +1,41 @@
+/**
+ * Glassmorphism Background Styles - Editor
+ * Includes frontend styles + editor-specific overrides
+ */
+
+/* Import frontend styles */
+@import './frontend.css';
+
+/* Editor-specific panel styling */
+.glassmorph-panel .components-color-picker {
+    width: 100%;
+}
+
+.glassmorph-panel .components-range-control {
+    margin-bottom: 16px;
+}
+
+/* Ensure glassmorphism renders correctly in editor */
+.editor-styles-wrapper .has-glassmorphism {
+    position: relative;
+    overflow: hidden;
+}
+
+.editor-styles-wrapper .has-glassmorphism::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: var(--glass-tint, rgba(255, 255, 255, 0.1));
+    opacity: var(--glass-opacity, 0.5);
+    backdrop-filter: blur(var(--glass-blur, 10px)) saturate(var(--glass-saturation, 1));
+    -webkit-backdrop-filter: blur(var(--glass-blur, 10px)) saturate(var(--glass-saturation, 1));
+    border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity, 0.3));
+    border-radius: inherit;
+}
+
+.editor-styles-wrapper .has-glassmorphism>* {
+    position: relative;
+    z-index: 1;
+}
